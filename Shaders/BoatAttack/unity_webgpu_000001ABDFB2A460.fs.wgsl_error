@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001ABDFB2A460.fs.wgsl:811:28 warning: 'textureSampleBias' must only be called from uniform control flow
+  let x_1036 : vec4<f32> = textureSampleBias(x_ScreenSpaceOcclusionTexture, sampler_ScreenSpaceOcclusionTexture, vec2<f32>(x_1032.x, x_1032.z), x_1035);
+                           ^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001ABDFB2A460.fs.wgsl:660:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_748) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001ABDFB2A460.fs.wgsl:628:16 note: return value of 'dpdxCoarse' may be non-uniform
+  u_xlat30.x = dpdxCoarse(x_698);
+               ^^^^^^^^^^
+

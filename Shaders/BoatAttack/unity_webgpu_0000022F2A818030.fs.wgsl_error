@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_0000022F2A818030.fs.wgsl:2117:30 warning: 'textureSampleBias' must only be called from uniform control flow
+    let x_3322 : vec4<f32> = textureSampleBias(x_MainLightCookieTexture, sampler_MainLightCookieTexture, vec2<f32>(x_3318.x, x_3318.y), x_3321);
+                             ^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_0000022F2A818030.fs.wgsl:2088:3 note: control flow depends on non-uniform value
+  if (x_3266) {
+  ^^
+
+D:/wgsl/unity_webgpu_0000022F2A818030.fs.wgsl:404:27 note: reading from module-scope private variable 'vs_INTERP0' may result in a non-uniform value
+  let x_167 : vec3<f32> = vs_INTERP0;
+                          ^^^^^^^^^^
+

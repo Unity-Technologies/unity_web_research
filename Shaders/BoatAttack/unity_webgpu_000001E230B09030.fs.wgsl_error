@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001E230B09030.fs.wgsl:143:27 warning: 'textureSampleBias' must only be called from uniform control flow
+  let x_150 : vec4<f32> = textureSampleBias(x_CameraDepthTexture, sampler_CameraDepthTexture, vec2<f32>(x_146.x, x_146.y), x_149);
+                          ^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001E230B09030.fs.wgsl:109:3 note: control flow depends on non-uniform value
+  if (x_74) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001E230B09030.fs.wgsl:90:26 note: return value of 'textureSampleBias' may be non-uniform
+  let x_40 : vec4<f32> = textureSampleBias(x_CameraDepthTexture, sampler_CameraDepthTexture, x_22, x_39);
+                         ^^^^^^^^^^^^^^^^^
+
