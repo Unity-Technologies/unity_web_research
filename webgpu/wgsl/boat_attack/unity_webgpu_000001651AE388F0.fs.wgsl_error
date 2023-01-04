@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001651AE388F0.fs.wgsl:1456:28 warning: 'textureSampleBias' must only be called from uniform control flow
+  let x_2139 : vec4<f32> = textureSampleBias(unity_LightmapInd, samplerunity_Lightmap, x_2136, x_2138);
+                           ^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001651AE388F0.fs.wgsl:1432:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_2092) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001651AE388F0.fs.wgsl:1400:14 note: return value of 'dpdxCoarse' may be non-uniform
+  u_xlat69 = dpdxCoarse(x_2054);
+             ^^^^^^^^^^
+

@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001B8D0764DF0.fs.wgsl:102:13 warning: 'dpdyCoarse' must only be called from uniform control flow
+  u_xlat0 = dpdyCoarse(vec3<f32>(x_137.z, x_137.x, x_137.y));
+            ^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001B8D0764DF0.fs.wgsl:98:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_127) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001B8D0764DF0.fs.wgsl:53:20 note: reading from module-scope private variable 'vs_TEXCOORD2' may result in a non-uniform value
+  let x_47 : f32 = vs_TEXCOORD2.w;
+                   ^^^^^^^^^^^^
+

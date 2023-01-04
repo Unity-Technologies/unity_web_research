@@ -1,0 +1,1 @@
+error: unhandled instruction with opcode 234: %186 = OpAtomicIAdd %6 %184 %13 %19 %185

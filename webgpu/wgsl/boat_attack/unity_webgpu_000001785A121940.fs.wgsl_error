@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001785A121940.fs.wgsl:119:13 warning: 'dpdyCoarse' must only be called from uniform control flow
+  u_xlat1 = dpdyCoarse(vec3<f32>(x_122.z, x_122.x, x_122.y));
+            ^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001785A121940.fs.wgsl:98:3 note: control flow depends on non-uniform value
+  if (x_74) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001785A121940.fs.wgsl:79:26 note: return value of 'textureSampleBias' may be non-uniform
+  let x_40 : vec4<f32> = textureSampleBias(x_CameraDepthTexture, sampler_CameraDepthTexture, x_22, x_39);
+                         ^^^^^^^^^^^^^^^^^
+

@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_000001B8D410D090.fs.wgsl:1336:30 warning: 'textureSampleBias' must only be called from uniform control flow
+    let x_1970 : vec4<f32> = textureSampleBias(x_MainLightCookieTexture, sampler_MainLightCookieTexture, vec2<f32>(x_1966.x, x_1966.y), x_1969);
+                             ^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_000001B8D410D090.fs.wgsl:1307:3 note: control flow depends on non-uniform value
+  if (x_1914) {
+  ^^
+
+D:/wgsl/unity_webgpu_000001B8D410D090.fs.wgsl:427:27 note: reading from module-scope private variable 'vs_TEXCOORD1' may result in a non-uniform value
+  let x_305 : vec3<f32> = vs_TEXCOORD1;
+                          ^^^^^^^^^^^^
+

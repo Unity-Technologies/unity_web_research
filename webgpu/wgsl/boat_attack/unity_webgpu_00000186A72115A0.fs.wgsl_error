@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_00000186A72115A0.fs.wgsl:74:27 warning: 'textureSample' must only be called from uniform control flow
+  let x_123 : vec4<f32> = textureSample(x_FaceTex, sampler_FaceTex, x_122);
+                          ^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_00000186A72115A0.fs.wgsl:70:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_107) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_00000186A72115A0.fs.wgsl:47:26 note: reading from module-scope private variable 'vs_TEXCOORD2' may result in a non-uniform value
+  let x_40 : vec4<f32> = vs_TEXCOORD2;
+                         ^^^^^^^^^^^^
+
