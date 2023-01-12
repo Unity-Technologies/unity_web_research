@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_00000219D63AA800.fs.wgsl:346:23 warning: 'textureSampleCompare' must only be called from uniform control flow
+    let x_490 : f32 = textureSampleCompare(x_ShadowMapTexture, sampler_ShadowMapTexture, x_488.xyz, x_488.w);
+                      ^^^^^^^^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_00000219D63AA800.fs.wgsl:309:3 note: control flow depends on non-uniform value
+  if (x_418) {
+  ^^
+
+D:/wgsl/unity_webgpu_00000219D63AA800.fs.wgsl:199:27 note: reading from module-scope private variable 'vs_TEXCOORD5' may result in a non-uniform value
+  let x_232 : vec3<f32> = vs_TEXCOORD5;
+                          ^^^^^^^^^^^^
+

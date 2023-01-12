@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_00000219E98202D0.fs.wgsl:230:27 warning: 'textureSample' must only be called from uniform control flow
+  let x_296 : vec4<f32> = textureSample(x_LightTexture0, sampler_LightTexture0, vec2<f32>(x_294.x, x_294.y));
+                          ^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_00000219E98202D0.fs.wgsl:129:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_117) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_00000219E98202D0.fs.wgsl:116:26 note: return value of 'textureSample' may be non-uniform
+  let x_92 : vec4<f32> = textureSample(x_Gradient, sampler_Gradient, vec2<f32>(x_90.x, x_90.y));
+                         ^^^^^^^^^^^^^
+

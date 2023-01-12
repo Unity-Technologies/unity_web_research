@@ -1,0 +1,12 @@
+D:/wgsl/unity_webgpu_00000219D753F240.fs.wgsl:246:29 warning: 'textureSample' must only be called from uniform control flow
+    let x_295 : vec4<f32> = textureSample(unity_ProbeVolumeSH, samplerunity_ProbeVolumeSH, vec3<f32>(x_293.x, x_293.z, x_293.w));
+                            ^^^^^^^^^^^^^
+
+D:/wgsl/unity_webgpu_00000219D753F240.fs.wgsl:186:3 note: control flow depends on non-uniform value
+  if (((select(0i, 1i, x_181) * -1i) != 0i)) {
+  ^^
+
+D:/wgsl/unity_webgpu_00000219D753F240.fs.wgsl:177:21 note: reading from module-scope private variable 'vs_COLOR0' may result in a non-uniform value
+  let x_164 : f32 = vs_COLOR0.w;
+                    ^^^^^^^^^
+

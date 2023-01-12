@@ -1,0 +1,501 @@
+struct PGlobals {
+  x_WorldSpaceCameraPos : vec3<f32>,
+  @size(4)
+  padding : u32,
+  x_ProjectionParams : vec4<f32>,
+  x_ZBufferParams : vec4<f32>,
+  unity_CameraToWorld : mat4x4<f32>,
+  x_LightProjectionParams : vec4<f32>,
+  x_LightShadowData : vec4<f32>,
+  unity_ShadowFadeCenterAndType : vec4<f32>,
+  x_LightPos : vec4<f32>,
+  x_LightColor : vec4<f32>,
+  unity_WorldToLight : mat4x4<f32>,
+}
+
+@group(1) @binding(0) var<uniform> x_14 : PGlobals;
+
+var<private> vs_TEXCOORD1 : vec3<f32>;
+
+var<private> vs_TEXCOORD0 : vec4<f32>;
+
+@group(0) @binding(0) var x_CameraDepthTexture : texture_2d<f32>;
+
+@group(0) @binding(7) var sampler_CameraDepthTexture : sampler;
+
+@group(0) @binding(1) var x_LightTextureB0 : texture_2d<f32>;
+
+@group(0) @binding(8) var sampler_LightTextureB0 : sampler;
+
+@group(0) @binding(6) var x_ShadowMapTexture : texture_depth_cube;
+
+@group(0) @binding(10) var sampler_ShadowMapTexture : sampler_comparison;
+
+@group(0) @binding(2) var x_LightTexture0 : texture_cube<f32>;
+
+@group(0) @binding(9) var sampler_LightTexture0 : sampler;
+
+@group(0) @binding(3) var x_CameraGBufferTexture0 : texture_2d<f32>;
+
+@group(0) @binding(11) var sampler_CameraGBufferTexture0 : sampler;
+
+@group(0) @binding(4) var x_CameraGBufferTexture1 : texture_2d<f32>;
+
+@group(0) @binding(12) var sampler_CameraGBufferTexture1 : sampler;
+
+@group(0) @binding(5) var x_CameraGBufferTexture2 : texture_2d<f32>;
+
+@group(0) @binding(13) var sampler_CameraGBufferTexture2 : sampler;
+
+var<private> SV_Target0 : vec4<f32>;
+
+var<private> gl_FragCoord : vec4<f32>;
+
+fn main_1() {
+  var u_xlat0 : vec3<f32>;
+  var u_xlat1 : vec3<f32>;
+  var u_xlat24 : f32;
+  var u_xlat2 : vec4<f32>;
+  var u_xlat3 : vec3<f32>;
+  var u_xlat8 : vec3<f32>;
+  var u_xlat17 : f32;
+  var u_xlat25 : f32;
+  var u_xlatb18 : bool;
+  var u_xlat18 : f32;
+  var u_xlat4 : vec4<f32>;
+  var txVec0 : vec4<f32>;
+  var u_xlat5 : vec3<f32>;
+  var txVec1 : vec4<f32>;
+  var txVec2 : vec4<f32>;
+  var txVec3 : vec4<f32>;
+  var u_xlat27 : f32;
+  var u_xlat6 : vec4<f32>;
+  var u_xlat7 : vec4<f32>;
+  var u_xlat16 : f32;
+  var u_xlat9 : f32;
+  var u_xlatb24 : bool;
+  var u_xlat_precise_vec4 : vec4<f32>;
+  var u_xlat_precise_ivec4 : vec4<i32>;
+  var u_xlat_precise_bvec4 : vec4<bool>;
+  var u_xlat_precise_uvec4 : vec4<u32>;
+  let x_21 : f32 = x_14.x_ProjectionParams.z;
+  let x_26 : f32 = vs_TEXCOORD1.z;
+  u_xlat0.x = (x_21 / x_26);
+  let x_31 : vec3<f32> = u_xlat0;
+  let x_33 : vec3<f32> = vs_TEXCOORD1;
+  u_xlat0 = (vec3<f32>(x_31.x, x_31.x, x_31.x) * x_33);
+  let x_39 : vec4<f32> = vs_TEXCOORD0;
+  let x_41 : vec4<f32> = vs_TEXCOORD0;
+  let x_43 : vec2<f32> = (vec2<f32>(x_39.x, x_39.y) / vec2<f32>(x_41.w, x_41.w));
+  let x_44 : vec3<f32> = u_xlat1;
+  u_xlat1 = vec3<f32>(x_43.x, x_43.y, x_44.z);
+  let x_57 : vec3<f32> = u_xlat1;
+  let x_59 : vec4<f32> = textureSample(x_CameraDepthTexture, sampler_CameraDepthTexture, vec2<f32>(x_57.x, x_57.y));
+  u_xlat24 = x_59.x;
+  let x_63 : f32 = x_14.x_ZBufferParams.x;
+  let x_64 : f32 = u_xlat24;
+  let x_68 : f32 = x_14.x_ZBufferParams.y;
+  u_xlat24 = ((x_63 * x_64) + x_68);
+  let x_71 : f32 = u_xlat24;
+  u_xlat24 = (1.0f / x_71);
+  let x_75 : f32 = u_xlat24;
+  let x_77 : vec3<f32> = u_xlat0;
+  let x_78 : vec3<f32> = (vec3<f32>(x_75, x_75, x_75) * x_77);
+  let x_79 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_78.x, x_78.y, x_78.z, x_79.w);
+  let x_82 : vec4<f32> = u_xlat2;
+  let x_87 : vec4<f32> = x_14.unity_CameraToWorld[1i];
+  u_xlat3 = (vec3<f32>(x_82.y, x_82.y, x_82.y) * vec3<f32>(x_87.x, x_87.y, x_87.z));
+  let x_92 : vec4<f32> = x_14.unity_CameraToWorld[0i];
+  let x_94 : vec4<f32> = u_xlat2;
+  let x_97 : vec3<f32> = u_xlat3;
+  let x_98 : vec3<f32> = ((vec3<f32>(x_92.x, x_92.y, x_92.z) * vec3<f32>(x_94.x, x_94.x, x_94.x)) + x_97);
+  let x_99 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_98.x, x_98.y, x_99.z, x_98.z);
+  let x_102 : vec4<f32> = x_14.unity_CameraToWorld[2i];
+  let x_104 : vec4<f32> = u_xlat2;
+  let x_107 : vec4<f32> = u_xlat2;
+  let x_109 : vec3<f32> = ((vec3<f32>(x_102.x, x_102.y, x_102.z) * vec3<f32>(x_104.z, x_104.z, x_104.z)) + vec3<f32>(x_107.x, x_107.y, x_107.w));
+  let x_110 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_109.x, x_109.y, x_110.z, x_109.z);
+  let x_112 : vec4<f32> = u_xlat2;
+  let x_115 : vec4<f32> = x_14.unity_CameraToWorld[3i];
+  let x_117 : vec3<f32> = (vec3<f32>(x_112.x, x_112.y, x_112.w) + vec3<f32>(x_115.x, x_115.y, x_115.z));
+  let x_118 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_117.x, x_117.y, x_118.z, x_117.z);
+  let x_120 : vec4<f32> = u_xlat2;
+  let x_124 : vec4<f32> = x_14.unity_ShadowFadeCenterAndType;
+  u_xlat3 = (vec3<f32>(x_120.x, x_120.y, x_120.w) + -(vec3<f32>(x_124.x, x_124.y, x_124.z)));
+  let x_128 : vec3<f32> = u_xlat3;
+  let x_129 : vec3<f32> = u_xlat3;
+  u_xlat0.x = dot(x_128, x_129);
+  let x_133 : f32 = u_xlat0.x;
+  u_xlat0.x = sqrt(x_133);
+  let x_137 : f32 = u_xlat0.z;
+  let x_139 : f32 = u_xlat24;
+  let x_142 : f32 = u_xlat0.x;
+  u_xlat0.x = ((-(x_137) * x_139) + x_142);
+  let x_147 : f32 = x_14.unity_ShadowFadeCenterAndType.w;
+  let x_149 : f32 = u_xlat0.x;
+  let x_152 : f32 = u_xlat2.z;
+  u_xlat0.x = ((x_147 * x_149) + x_152);
+  let x_156 : vec4<f32> = u_xlat2;
+  let x_160 : vec4<f32> = x_14.x_LightPos;
+  u_xlat8 = (vec3<f32>(x_156.x, x_156.y, x_156.w) + -(vec3<f32>(x_160.x, x_160.y, x_160.z)));
+  let x_165 : vec3<f32> = u_xlat8;
+  let x_166 : vec3<f32> = u_xlat8;
+  u_xlat17 = dot(x_165, x_166);
+  let x_169 : f32 = u_xlat17;
+  u_xlat25 = inverseSqrt(x_169);
+  let x_171 : vec3<f32> = u_xlat8;
+  let x_172 : f32 = u_xlat25;
+  u_xlat3 = (x_171 * vec3<f32>(x_172, x_172, x_172));
+  let x_175 : f32 = u_xlat17;
+  let x_177 : f32 = x_14.x_LightPos.w;
+  u_xlat17 = (x_175 * x_177);
+  let x_184 : f32 = u_xlat17;
+  let x_186 : vec4<f32> = textureSample(x_LightTextureB0, sampler_LightTextureB0, vec2<f32>(x_184, x_184));
+  u_xlat17 = x_186.x;
+  let x_189 : f32 = u_xlat0.x;
+  let x_192 : f32 = x_14.x_LightShadowData.z;
+  let x_195 : f32 = x_14.x_LightShadowData.w;
+  u_xlat0.x = ((x_189 * x_192) + x_195);
+  let x_199 : f32 = u_xlat0.x;
+  u_xlat0.x = clamp(x_199, 0.0f, 1.0f);
+  let x_207 : f32 = u_xlat0.x;
+  u_xlatb18 = (x_207 < 0.99000001f);
+  let x_210 : bool = u_xlatb18;
+  if (x_210) {
+    let x_215 : f32 = u_xlat8.y;
+    let x_218 : f32 = u_xlat8.x;
+    u_xlat18 = max(abs(x_215), abs(x_218));
+    let x_222 : f32 = u_xlat8.z;
+    let x_224 : f32 = u_xlat18;
+    u_xlat18 = max(abs(x_222), x_224);
+    let x_226 : f32 = u_xlat18;
+    let x_229 : f32 = x_14.x_LightProjectionParams.z;
+    u_xlat18 = (x_226 + -(x_229));
+    let x_232 : f32 = u_xlat18;
+    u_xlat18 = max(x_232, 0.00001f);
+    let x_235 : f32 = u_xlat18;
+    let x_237 : f32 = x_14.x_LightProjectionParams.w;
+    u_xlat18 = (x_235 * x_237);
+    let x_240 : f32 = x_14.x_LightProjectionParams.y;
+    let x_241 : f32 = u_xlat18;
+    u_xlat18 = (x_240 / x_241);
+    let x_243 : f32 = u_xlat18;
+    let x_245 : f32 = x_14.x_LightProjectionParams.x;
+    u_xlat18 = (x_243 + -(x_245));
+    let x_248 : f32 = u_xlat18;
+    u_xlat18 = (-(x_248) + 1.0f);
+    let x_252 : vec3<f32> = u_xlat8;
+    let x_255 : vec3<f32> = (x_252 + vec3<f32>(0.0078125f, 0.0078125f, 0.0078125f));
+    let x_256 : vec4<f32> = u_xlat4;
+    u_xlat4 = vec4<f32>(x_255.x, x_255.y, x_255.z, x_256.w);
+    let x_259 : vec4<f32> = u_xlat4;
+    let x_260 : vec3<f32> = vec3<f32>(x_259.x, x_259.y, x_259.z);
+    let x_261 : f32 = u_xlat18;
+    txVec0 = vec4<f32>(x_260.x, x_260.y, x_260.z, x_261);
+    let x_274 : vec4<f32> = txVec0;
+    let x_276 : f32 = textureSampleCompare(x_ShadowMapTexture, sampler_ShadowMapTexture, x_274.xyz, x_274.w);
+    u_xlat4.x = x_276;
+    let x_279 : vec3<f32> = u_xlat8;
+    u_xlat5 = (x_279 + vec3<f32>(-0.0078125f, -0.0078125f, 0.0078125f));
+    let x_284 : vec3<f32> = u_xlat5;
+    let x_285 : f32 = u_xlat18;
+    txVec1 = vec4<f32>(x_284.x, x_284.y, x_284.z, x_285);
+    let x_293 : vec4<f32> = txVec1;
+    let x_295 : f32 = textureSampleCompare(x_ShadowMapTexture, sampler_ShadowMapTexture, x_293.xyz, x_293.w);
+    u_xlat4.y = x_295;
+    let x_297 : vec3<f32> = u_xlat8;
+    u_xlat5 = (x_297 + vec3<f32>(-0.0078125f, 0.0078125f, -0.0078125f));
+    let x_301 : vec3<f32> = u_xlat5;
+    let x_302 : f32 = u_xlat18;
+    txVec2 = vec4<f32>(x_301.x, x_301.y, x_301.z, x_302);
+    let x_310 : vec4<f32> = txVec2;
+    let x_312 : f32 = textureSampleCompare(x_ShadowMapTexture, sampler_ShadowMapTexture, x_310.xyz, x_310.w);
+    u_xlat4.z = x_312;
+    let x_314 : vec3<f32> = u_xlat8;
+    u_xlat5 = (x_314 + vec3<f32>(0.0078125f, -0.0078125f, -0.0078125f));
+    let x_318 : vec3<f32> = u_xlat5;
+    let x_319 : f32 = u_xlat18;
+    txVec3 = vec4<f32>(x_318.x, x_318.y, x_318.z, x_319);
+    let x_327 : vec4<f32> = txVec3;
+    let x_329 : f32 = textureSampleCompare(x_ShadowMapTexture, sampler_ShadowMapTexture, x_327.xyz, x_327.w);
+    u_xlat4.w = x_329;
+    let x_331 : vec4<f32> = u_xlat4;
+    u_xlat18 = dot(x_331, vec4<f32>(0.25f, 0.25f, 0.25f, 0.25f));
+    let x_337 : f32 = x_14.x_LightShadowData.x;
+    u_xlat27 = (-(x_337) + 1.0f);
+    let x_340 : f32 = u_xlat18;
+    let x_341 : f32 = u_xlat27;
+    let x_344 : f32 = x_14.x_LightShadowData.x;
+    u_xlat18 = ((x_340 * x_341) + x_344);
+  } else {
+    u_xlat18 = 1.0f;
+  }
+  let x_347 : f32 = u_xlat18;
+  u_xlat27 = (-(x_347) + 1.0f);
+  let x_351 : f32 = u_xlat0.x;
+  let x_352 : f32 = u_xlat27;
+  let x_354 : f32 = u_xlat18;
+  u_xlat0.x = ((x_351 * x_352) + x_354);
+  let x_358 : f32 = u_xlat0.x;
+  let x_359 : f32 = u_xlat17;
+  u_xlat0.x = (x_358 * x_359);
+  let x_362 : vec4<f32> = u_xlat2;
+  let x_366 : vec4<f32> = x_14.unity_WorldToLight[1i];
+  let x_368 : vec3<f32> = (vec3<f32>(x_362.y, x_362.y, x_362.y) * vec3<f32>(x_366.x, x_366.y, x_366.z));
+  let x_369 : vec4<f32> = u_xlat4;
+  u_xlat4 = vec4<f32>(x_368.x, x_368.y, x_368.z, x_369.w);
+  let x_372 : vec4<f32> = x_14.unity_WorldToLight[0i];
+  let x_374 : vec4<f32> = u_xlat2;
+  let x_377 : vec4<f32> = u_xlat4;
+  let x_379 : vec3<f32> = ((vec3<f32>(x_372.x, x_372.y, x_372.z) * vec3<f32>(x_374.x, x_374.x, x_374.x)) + vec3<f32>(x_377.x, x_377.y, x_377.z));
+  let x_380 : vec4<f32> = u_xlat4;
+  u_xlat4 = vec4<f32>(x_379.x, x_379.y, x_379.z, x_380.w);
+  let x_383 : vec4<f32> = x_14.unity_WorldToLight[2i];
+  let x_385 : vec4<f32> = u_xlat2;
+  let x_388 : vec4<f32> = u_xlat4;
+  let x_390 : vec3<f32> = ((vec3<f32>(x_383.x, x_383.y, x_383.z) * vec3<f32>(x_385.w, x_385.w, x_385.w)) + vec3<f32>(x_388.x, x_388.y, x_388.z));
+  let x_391 : vec4<f32> = u_xlat4;
+  u_xlat4 = vec4<f32>(x_390.x, x_390.y, x_390.z, x_391.w);
+  let x_393 : vec4<f32> = u_xlat4;
+  let x_396 : vec4<f32> = x_14.unity_WorldToLight[3i];
+  let x_398 : vec3<f32> = (vec3<f32>(x_393.x, x_393.y, x_393.z) + vec3<f32>(x_396.x, x_396.y, x_396.z));
+  let x_399 : vec4<f32> = u_xlat4;
+  u_xlat4 = vec4<f32>(x_398.x, x_398.y, x_398.z, x_399.w);
+  let x_409 : vec4<f32> = u_xlat4;
+  let x_412 : vec4<f32> = textureSampleBias(x_LightTexture0, sampler_LightTexture0, vec3<f32>(x_409.x, x_409.y, x_409.z), -8.0f);
+  u_xlat17 = x_412.w;
+  let x_415 : f32 = u_xlat0.x;
+  let x_416 : f32 = u_xlat17;
+  u_xlat0.x = (x_415 * x_416);
+  let x_419 : vec3<f32> = u_xlat0;
+  let x_423 : vec4<f32> = x_14.x_LightColor;
+  let x_425 : vec3<f32> = (vec3<f32>(x_419.x, x_419.x, x_419.x) * vec3<f32>(x_423.x, x_423.y, x_423.z));
+  let x_426 : vec4<f32> = u_xlat4;
+  u_xlat4 = vec4<f32>(x_425.x, x_425.y, x_425.z, x_426.w);
+  let x_433 : vec3<f32> = u_xlat1;
+  let x_435 : vec4<f32> = textureSample(x_CameraGBufferTexture0, sampler_CameraGBufferTexture0, vec2<f32>(x_433.x, x_433.y));
+  u_xlat5 = vec3<f32>(x_435.x, x_435.y, x_435.z);
+  let x_443 : vec3<f32> = u_xlat1;
+  let x_445 : vec4<f32> = textureSample(x_CameraGBufferTexture1, sampler_CameraGBufferTexture1, vec2<f32>(x_443.x, x_443.y));
+  u_xlat6 = x_445;
+  let x_451 : vec3<f32> = u_xlat1;
+  let x_453 : vec4<f32> = textureSample(x_CameraGBufferTexture2, sampler_CameraGBufferTexture2, vec2<f32>(x_451.x, x_451.y));
+  u_xlat1 = vec3<f32>(x_453.x, x_453.y, x_453.z);
+  let x_455 : vec3<f32> = u_xlat1;
+  u_xlat1 = ((x_455 * vec3<f32>(2.0f, 2.0f, 2.0f)) + vec3<f32>(-1.0f, -1.0f, -1.0f));
+  let x_462 : vec3<f32> = u_xlat1;
+  let x_463 : vec3<f32> = u_xlat1;
+  u_xlat0.x = dot(x_462, x_463);
+  let x_467 : f32 = u_xlat0.x;
+  u_xlat0.x = inverseSqrt(x_467);
+  let x_470 : vec3<f32> = u_xlat0;
+  let x_472 : vec3<f32> = u_xlat1;
+  u_xlat1 = (vec3<f32>(x_470.x, x_470.x, x_470.x) * x_472);
+  let x_474 : vec4<f32> = u_xlat2;
+  let x_478 : vec3<f32> = x_14.x_WorldSpaceCameraPos;
+  let x_480 : vec3<f32> = (vec3<f32>(x_474.x, x_474.y, x_474.w) + -(x_478));
+  let x_481 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_480.x, x_480.y, x_480.z, x_481.w);
+  let x_483 : vec4<f32> = u_xlat2;
+  let x_485 : vec4<f32> = u_xlat2;
+  u_xlat0.x = dot(vec3<f32>(x_483.x, x_483.y, x_483.z), vec3<f32>(x_485.x, x_485.y, x_485.z));
+  let x_490 : f32 = u_xlat0.x;
+  u_xlat0.x = inverseSqrt(x_490);
+  let x_493 : vec3<f32> = u_xlat0;
+  let x_495 : vec4<f32> = u_xlat2;
+  let x_497 : vec3<f32> = (vec3<f32>(x_493.x, x_493.x, x_493.x) * vec3<f32>(x_495.x, x_495.y, x_495.z));
+  let x_498 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_497.x, x_497.y, x_497.z, x_498.w);
+  let x_501 : vec4<f32> = u_xlat6;
+  u_xlat7 = (-(vec4<f32>(x_501.w, x_501.x, x_501.y, x_501.z)) + vec4<f32>(1.0f, 1.0f, 1.0f, 1.0f));
+  let x_506 : vec3<f32> = u_xlat8;
+  let x_508 : f32 = u_xlat25;
+  let x_511 : vec4<f32> = u_xlat2;
+  u_xlat0 = ((-(x_506) * vec3<f32>(x_508, x_508, x_508)) + -(vec3<f32>(x_511.x, x_511.y, x_511.z)));
+  let x_515 : vec3<f32> = u_xlat0;
+  let x_516 : vec3<f32> = u_xlat0;
+  u_xlat24 = dot(x_515, x_516);
+  let x_518 : f32 = u_xlat24;
+  u_xlat24 = max(x_518, 0.001f);
+  let x_521 : f32 = u_xlat24;
+  u_xlat24 = inverseSqrt(x_521);
+  let x_523 : f32 = u_xlat24;
+  let x_525 : vec3<f32> = u_xlat0;
+  u_xlat0 = (vec3<f32>(x_523, x_523, x_523) * x_525);
+  let x_527 : vec3<f32> = u_xlat1;
+  let x_528 : vec4<f32> = u_xlat2;
+  u_xlat24 = dot(x_527, -(vec3<f32>(x_528.x, x_528.y, x_528.z)));
+  let x_532 : vec3<f32> = u_xlat1;
+  let x_533 : vec3<f32> = u_xlat3;
+  u_xlat25 = dot(x_532, -(x_533));
+  let x_536 : f32 = u_xlat25;
+  u_xlat25 = clamp(x_536, 0.0f, 1.0f);
+  let x_538 : vec3<f32> = u_xlat1;
+  let x_539 : vec3<f32> = u_xlat0;
+  u_xlat1.x = dot(x_538, x_539);
+  let x_543 : f32 = u_xlat1.x;
+  u_xlat1.x = clamp(x_543, 0.0f, 1.0f);
+  let x_546 : vec3<f32> = u_xlat3;
+  let x_548 : vec3<f32> = u_xlat0;
+  u_xlat0.x = dot(-(x_546), x_548);
+  let x_552 : f32 = u_xlat0.x;
+  u_xlat0.x = clamp(x_552, 0.0f, 1.0f);
+  let x_556 : f32 = u_xlat0.x;
+  let x_558 : f32 = u_xlat0.x;
+  u_xlat8.x = (x_556 * x_558);
+  let x_561 : vec3<f32> = u_xlat8;
+  let x_563 : vec4<f32> = u_xlat7;
+  u_xlat8.x = dot(vec2<f32>(x_561.x, x_561.x), vec2<f32>(x_563.x, x_563.x));
+  let x_568 : f32 = u_xlat8.x;
+  u_xlat8.x = (x_568 + -0.5f);
+  let x_573 : f32 = u_xlat25;
+  u_xlat16 = (-(x_573) + 1.0f);
+  let x_577 : f32 = u_xlat16;
+  let x_578 : f32 = u_xlat16;
+  u_xlat9 = (x_577 * x_578);
+  let x_580 : f32 = u_xlat9;
+  let x_581 : f32 = u_xlat9;
+  u_xlat9 = (x_580 * x_581);
+  let x_583 : f32 = u_xlat16;
+  let x_584 : f32 = u_xlat9;
+  u_xlat16 = (x_583 * x_584);
+  let x_587 : f32 = u_xlat8.x;
+  let x_588 : f32 = u_xlat16;
+  u_xlat16 = ((x_587 * x_588) + 1.0f);
+  let x_591 : f32 = u_xlat24;
+  u_xlat9 = (-(abs(x_591)) + 1.0f);
+  let x_595 : f32 = u_xlat9;
+  let x_596 : f32 = u_xlat9;
+  u_xlat17 = (x_595 * x_596);
+  let x_598 : f32 = u_xlat17;
+  let x_599 : f32 = u_xlat17;
+  u_xlat17 = (x_598 * x_599);
+  let x_601 : f32 = u_xlat9;
+  let x_602 : f32 = u_xlat17;
+  u_xlat9 = (x_601 * x_602);
+  let x_605 : f32 = u_xlat8.x;
+  let x_606 : f32 = u_xlat9;
+  u_xlat8.x = ((x_605 * x_606) + 1.0f);
+  let x_611 : f32 = u_xlat8.x;
+  let x_612 : f32 = u_xlat16;
+  u_xlat8.x = (x_611 * x_612);
+  let x_616 : f32 = u_xlat7.x;
+  let x_618 : f32 = u_xlat7.x;
+  u_xlat16 = (x_616 * x_618);
+  let x_620 : f32 = u_xlat16;
+  u_xlat16 = max(x_620, 0.002f);
+  let x_623 : f32 = u_xlat16;
+  u_xlat9 = (-(x_623) + 1.0f);
+  let x_626 : f32 = u_xlat24;
+  let x_628 : f32 = u_xlat9;
+  let x_630 : f32 = u_xlat16;
+  u_xlat17 = ((abs(x_626) * x_628) + x_630);
+  let x_632 : f32 = u_xlat25;
+  let x_633 : f32 = u_xlat9;
+  let x_635 : f32 = u_xlat16;
+  u_xlat9 = ((x_632 * x_633) + x_635);
+  let x_637 : f32 = u_xlat24;
+  let x_639 : f32 = u_xlat9;
+  u_xlat24 = (abs(x_637) * x_639);
+  let x_641 : f32 = u_xlat25;
+  let x_642 : f32 = u_xlat17;
+  let x_644 : f32 = u_xlat24;
+  u_xlat24 = ((x_641 * x_642) + x_644);
+  let x_646 : f32 = u_xlat24;
+  u_xlat24 = (x_646 + 0.00001f);
+  let x_649 : f32 = u_xlat24;
+  u_xlat24 = (0.5f / x_649);
+  let x_651 : f32 = u_xlat16;
+  let x_652 : f32 = u_xlat16;
+  u_xlat16 = (x_651 * x_652);
+  let x_655 : f32 = u_xlat1.x;
+  let x_656 : f32 = u_xlat16;
+  let x_659 : f32 = u_xlat1.x;
+  u_xlat9 = ((x_655 * x_656) + -(x_659));
+  let x_662 : f32 = u_xlat9;
+  let x_664 : f32 = u_xlat1.x;
+  u_xlat1.x = ((x_662 * x_664) + 1.0f);
+  let x_668 : f32 = u_xlat16;
+  u_xlat16 = (x_668 * 0.318309873f);
+  let x_672 : f32 = u_xlat1.x;
+  let x_674 : f32 = u_xlat1.x;
+  u_xlat1.x = ((x_672 * x_674) + 0.0000001f);
+  let x_679 : f32 = u_xlat16;
+  let x_681 : f32 = u_xlat1.x;
+  u_xlat16 = (x_679 / x_681);
+  let x_683 : f32 = u_xlat16;
+  let x_684 : f32 = u_xlat24;
+  u_xlat8.y = (x_683 * x_684);
+  let x_687 : f32 = u_xlat25;
+  let x_689 : vec3<f32> = u_xlat8;
+  let x_691 : vec2<f32> = (vec2<f32>(x_687, x_687) * vec2<f32>(x_689.x, x_689.y));
+  let x_692 : vec3<f32> = u_xlat8;
+  u_xlat8 = vec3<f32>(x_691.x, x_691.y, x_692.z);
+  let x_695 : f32 = u_xlat8.y;
+  u_xlat16 = (x_695 * 3.141592741f);
+  let x_698 : f32 = u_xlat16;
+  u_xlat16 = max(x_698, 0.0f);
+  let x_700 : vec4<f32> = u_xlat6;
+  let x_702 : vec4<f32> = u_xlat6;
+  u_xlat24 = dot(vec3<f32>(x_700.x, x_700.y, x_700.z), vec3<f32>(x_702.x, x_702.y, x_702.z));
+  let x_706 : f32 = u_xlat24;
+  u_xlatb24 = !((x_706 == 0.0f));
+  let x_708 : bool = u_xlatb24;
+  u_xlat24 = select(0.0f, 1.0f, x_708);
+  let x_710 : f32 = u_xlat24;
+  let x_711 : f32 = u_xlat16;
+  u_xlat16 = (x_710 * x_711);
+  let x_713 : vec3<f32> = u_xlat8;
+  let x_715 : vec4<f32> = u_xlat4;
+  u_xlat1 = (vec3<f32>(x_713.x, x_713.x, x_713.x) * vec3<f32>(x_715.x, x_715.y, x_715.z));
+  let x_718 : vec4<f32> = u_xlat4;
+  let x_720 : f32 = u_xlat16;
+  u_xlat8 = (vec3<f32>(x_718.x, x_718.y, x_718.z) * vec3<f32>(x_720, x_720, x_720));
+  let x_724 : f32 = u_xlat0.x;
+  u_xlat0.x = (-(x_724) + 1.0f);
+  let x_729 : f32 = u_xlat0.x;
+  let x_731 : f32 = u_xlat0.x;
+  u_xlat25 = (x_729 * x_731);
+  let x_733 : f32 = u_xlat25;
+  let x_734 : f32 = u_xlat25;
+  u_xlat25 = (x_733 * x_734);
+  let x_737 : f32 = u_xlat0.x;
+  let x_738 : f32 = u_xlat25;
+  u_xlat0.x = (x_737 * x_738);
+  let x_741 : vec4<f32> = u_xlat7;
+  let x_743 : vec3<f32> = u_xlat0;
+  let x_746 : vec4<f32> = u_xlat6;
+  let x_748 : vec3<f32> = ((vec3<f32>(x_741.y, x_741.z, x_741.w) * vec3<f32>(x_743.x, x_743.x, x_743.x)) + vec3<f32>(x_746.x, x_746.y, x_746.z));
+  let x_749 : vec4<f32> = u_xlat2;
+  u_xlat2 = vec4<f32>(x_748.x, x_748.y, x_748.z, x_749.w);
+  let x_751 : vec3<f32> = u_xlat8;
+  let x_752 : vec4<f32> = u_xlat2;
+  u_xlat0 = (x_751 * vec3<f32>(x_752.x, x_752.y, x_752.z));
+  let x_757 : vec3<f32> = u_xlat5;
+  let x_758 : vec3<f32> = u_xlat1;
+  let x_760 : vec3<f32> = u_xlat0;
+  let x_761 : vec3<f32> = ((x_757 * x_758) + x_760);
+  let x_762 : vec4<f32> = SV_Target0;
+  SV_Target0 = vec4<f32>(x_761.x, x_761.y, x_761.z, x_762.w);
+  SV_Target0.w = 1.0f;
+  return;
+}
+
+struct main_out {
+  @location(0)
+  SV_Target0_1 : vec4<f32>,
+}
+
+@fragment
+fn main(@location(1) vs_TEXCOORD1_param : vec3<f32>, @location(0) vs_TEXCOORD0_param : vec4<f32>, @builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
+  vs_TEXCOORD1 = vs_TEXCOORD1_param;
+  vs_TEXCOORD0 = vs_TEXCOORD0_param;
+  gl_FragCoord = gl_FragCoord_param;
+  main_1();
+  return main_out(SV_Target0);
+}
+
