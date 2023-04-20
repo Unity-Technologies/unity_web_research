@@ -1,0 +1,62 @@
+diagnostic(off, derivative_uniformity);
+
+struct PGlobals {
+  /* @offset(0) */
+  x_GlobalMipBias : vec2<f32>,
+}
+
+var<private> gl_FragCoord : vec4<f32>;
+
+var<private> u_xlat0 : f32;
+
+@group(0) @binding(0) var x_TerrainHolesTexture : texture_2d<f32>;
+
+@group(0) @binding(1) var sampler_TerrainHolesTexture : sampler;
+
+var<private> vs_TEXCOORD0 : vec2<f32>;
+
+@group(1) @binding(0) var<uniform> x_44 : PGlobals;
+
+var<private> u_xlatb0 : bool;
+
+var<private> SV_TARGET0 : vec4<f32>;
+
+fn main_1() {
+  var hlslcc_FragCoord : vec4<f32>;
+  var u_xlat_precise_vec4 : vec4<f32>;
+  var u_xlat_precise_ivec4 : vec4<i32>;
+  var u_xlat_precise_bvec4 : vec4<bool>;
+  var u_xlat_precise_uvec4 : vec4<u32>;
+  let x_13 : vec4<f32> = gl_FragCoord;
+  let x_14 : vec3<f32> = vec3<f32>(x_13.x, x_13.y, x_13.z);
+  let x_20 : f32 = gl_FragCoord.w;
+  hlslcc_FragCoord = vec4<f32>(x_14.x, x_14.y, x_14.z, (1.0f / x_20));
+  let x_41 : vec2<f32> = vs_TEXCOORD0;
+  let x_50 : f32 = x_44.x_GlobalMipBias.x;
+  let x_51 : vec4<f32> = textureSampleBias(x_TerrainHolesTexture, sampler_TerrainHolesTexture, x_41, x_50);
+  u_xlat0 = x_51.x;
+  let x_56 : f32 = u_xlat0;
+  u_xlatb0 = (x_56 == 0.0f);
+  let x_59 : bool = u_xlatb0;
+  if (((select(0i, 1i, x_59) * -1i) != 0i)) {
+    discard;
+  }
+  let x_70 : vec4<f32> = hlslcc_FragCoord;
+  SV_TARGET0 = vec4<f32>(x_70.z, x_70.z, x_70.z, x_70.z);
+  return;
+}
+
+struct main_out {
+  @location(0)
+  SV_TARGET0_1 : vec4<f32>,
+}
+
+@fragment
+fn main(@builtin(position) gl_FragCoord_param : vec4<f32>, @location(0) vs_TEXCOORD0_param : vec2<f32>) -> main_out {
+  gl_FragCoord = gl_FragCoord_param;
+  vs_TEXCOORD0 = vs_TEXCOORD0_param;
+  main_1();
+  return main_out(SV_TARGET0);
+}
+
+
